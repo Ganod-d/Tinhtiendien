@@ -1,0 +1,10 @@
+RewriteEngine On
+RewriteRule ^register$ register.php [L]
+RewriteRule ^login$ login.php [L]
+RewriteRule ^dashboard$ dashboard.php [L]
+RewriteRule ^calculate$ calculate.php [L]
+RewriteRule ^logout$ logout.php [L]
+RewriteRule ^admin_login$ admin_login.php [L]
+RewriteRule ^admin_dashboard$ admin_dashboard.php [L]
+RewriteRule ^edit_usage$ edit_usage.php [L]
+RewriteRule ^admin_logout$ admin_logout.php [L]
