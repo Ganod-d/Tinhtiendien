@@ -3,7 +3,7 @@ require 'db.php';
 session_start();
 
 if (!isset($_SESSION['user_id'])) {
-    header('Location: login');
+    header('Location: login.php');
     exit;
 }
 
@@ -22,6 +22,15 @@ $usages = $stmt->fetchAll();
 </head>
 <body>
     <h2>Dashboard</h2>
+    
+    <!-- Menu -->
+    <nav>
+        <ul>
+            <li><a href="notification.php">Thông báo số điện</a></li>
+            <li><a href="payment.php">Thanh toán</a></li>
+        </ul>
+    </nav>
+
     <h3>Electricity Usage and Costs</h3>
     <table border="1">
         <thead>
@@ -33,16 +42,22 @@ $usages = $stmt->fetchAll();
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($usages as $usage): ?>
+            <?php if ($usages): ?>
+                <?php foreach ($usages as $usage): ?>
+                    <tr>
+                        <td><?php echo htmlspecialchars($usage['month']); ?></td>
+                        <td><?php echo htmlspecialchars($usage['year']); ?></td>
+                        <td><?php echo htmlspecialchars($usage['kwh']); ?></td>
+                        <td><?php echo htmlspecialchars($usage['cost']); ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php else: ?>
                 <tr>
-                    <td><?php echo htmlspecialchars($usage['month']); ?></td>
-                    <td><?php echo htmlspecialchars($usage['year']); ?></td>
-                    <td><?php echo htmlspecialchars($usage['kwh']); ?></td>
-                    <td><?php echo htmlspecialchars($usage['cost']); ?></td>
+                    <td colspan="4">No usage data available.</td>
                 </tr>
-            <?php endforeach; ?>
+            <?php endif; ?>
         </tbody>
     </table>
-    <a href="logout">Logout</a>
+    <a href="logout.php">Logout</a>
 </body>
 </html>
